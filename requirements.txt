@@ -1,0 +1,17 @@
+# RAG Webscraping Q&A System Requirements
+# Core dependencies for the Streamlit app and notebook
+
+# Web scraping
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+
+# Machine Learning & Embeddings
+sentence-transformers>=2.2.0
+chromadb>=0.4.0
+
+# LangChain for RAG pipeline
+langchain>=0.1.0
+langchain-community>=0.0.20
+
+# Streamlit for web interface
+streamlit>=1.28.0
