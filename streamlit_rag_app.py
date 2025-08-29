@@ -186,25 +186,25 @@ st.markdown("""
     
     /* Custom colored boxes */
     .gradient-box {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
         color: white;
         padding: 1.5rem;
         border-radius: 15px;
         margin: 1rem 0;
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
         text-align: center;
     }
     
     .answer-display {
-        background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
-        border: 2px solid #22c55e;
+        background: linear-gradient(135deg, #f0f9ff 0%, #dbeafe 100%);
+        border: 2px solid #3b82f6;
         border-radius: 15px;
         padding: 2rem;
         margin: 1.5rem 0;
         color: #1f2937;
         font-size: 16px;
         line-height: 1.7;
-        box-shadow: 0 4px 15px rgba(34, 197, 94, 0.1);
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15);
     }
     
     /* Columns styling */
@@ -246,6 +246,41 @@ st.markdown("""
         margin: 0.5rem 0;
         color: #047857;
         font-weight: 500;
+    }
+    
+    .custom-info {
+        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        border: 2px solid #3b82f6;
+        border-radius: 10px;
+        padding: 1rem;
+        margin: 0.5rem 0;
+        color: #1d4ed8;
+        font-weight: 500;
+    }
+    
+    .custom-warning {
+        background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        border: 2px solid #f59e0b;
+        border-radius: 10px;
+        padding: 1rem;
+        margin: 0.5rem 0;
+        color: #d97706;
+        font-weight: 500;
+    }
+    
+    /* Content card styling */
+    .content-card {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: box-shadow 0.3s ease;
+    }
+    
+    .content-card:hover {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
     
     .custom-error {
