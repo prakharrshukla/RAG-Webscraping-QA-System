@@ -72,23 +72,45 @@ st.markdown("""
     
     /* Button styling */
     .stButton > button {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 600;
-        padding: 0.7rem 1.5rem;
+        padding: 0.6rem 1rem;
         border-radius: 10px;
-        border: none;
+        border: 2px solid #e2e8f0;
         transition: all 0.3s ease;
         font-family: 'Inter', 'Segoe UI', sans-serif;
-        background-color: #f8fafc;
-        border: 2px solid #e2e8f0;
+        background-color: white;
         color: #374151;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
     
     .stButton > button:hover {
-        background-color: #f1f5f9;
-        border-color: #cbd5e1;
+        background-color: #f8fafc;
+        border-color: #3b82f6;
+        color: #1e40af;
         transform: translateY(-1px);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    }
+    
+    /* Quick question buttons - special styling for better visibility */
+    .stButton > button[data-testid*="q_"] {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border: 2px solid #cbd5e1;
+        color: #1f2937;
+        font-weight: 500;
+        font-size: 13px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-height: 45px;
+    }
+    
+    .stButton > button[data-testid*="q_"]:hover {
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        border-color: #1d4ed8;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
     }
     
     /* Primary button styling */
@@ -232,9 +254,45 @@ st.markdown("""
         line-height: 1.6;
     }
     
-    /* Fix markdown styling */
+    /* Fix markdown styling - better visibility */
     .stMarkdown {
-        color: #374151;
+        color: #1f2937;
+    }
+    
+    /* Dark mode compatibility */
+    @media (prefers-color-scheme: dark) {
+        .stMarkdown {
+            color: #f9fafb !important;
+        }
+        
+        .stButton > button {
+            background-color: #374151 !important;
+            color: #f9fafb !important;
+            border-color: #6b7280 !important;
+        }
+        
+        .stButton > button:hover {
+            background-color: #4b5563 !important;
+            border-color: #3b82f6 !important;
+        }
+        
+        .stButton > button[data-testid*="q_"] {
+            background: linear-gradient(135deg, #374151 0%, #4b5563 100%) !important;
+            color: #f9fafb !important;
+            border-color: #6b7280 !important;
+        }
+    }
+    
+    /* Improved text contrast for better readability */
+    .element-container strong {
+        color: #111827;
+        font-weight: 700;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+        .element-container strong {
+            color: #f9fafb !important;
+        }
     }
     
     /* Custom success/error boxes for inline use */
@@ -622,7 +680,7 @@ def main():
     
     with col1:
         # URL Input with better guidance
-        st.markdown("### 🌐 Step 1: Choose Your Website")
+        st.markdown("### 🌐 Choose Your Website")
         st.markdown("**Select from recommended sites or enter your own URL:**")
         
         url_input = st.text_input(
@@ -644,7 +702,7 @@ def main():
         st.markdown("<br>", unsafe_allow_html=True)
         
         # Question Input
-        st.markdown("### ❓ Step 2: Ask Your Question")
+        st.markdown("### ❓ Ask Your Question")
         st.markdown("**What would you like to know about this website?**")
         
         # Sample questions based on URL type
@@ -672,7 +730,7 @@ def main():
             help="💡 Ask specific questions for better answers!"
         )
         
-        # Sample question suggestions
+        # Sample question suggestions with better styling
         st.markdown("**💡 Quick Question Ideas:**")
         sample_questions = [
             "📋 Summarize main points",
@@ -682,25 +740,36 @@ def main():
             "📊 Important facts listed"
         ]
         
-        cols = st.columns(len(sample_questions))
+        # Create 3 columns for better alignment, then 2 columns for the last row
+        col1, col2, col3 = st.columns(3)
+        col4, col5 = st.columns(2)
+        
+        question_cols = [col1, col2, col3, col4, col5]
+        
         for i, question in enumerate(sample_questions):
-            if cols[i].button(question, key=f"q_{i}"):
-                if "Summarize" in question:
-                    st.session_state.question_input = "Summarize the main content and key points from this website"
-                elif "news" in question:
-                    st.session_state.question_input = "What are the latest news or updates mentioned on this website?"
-                elif "topics" in question:
-                    st.session_state.question_input = "What are the main topics discussed on this website?"
-                elif "ideas" in question:
-                    st.session_state.question_input = "Explain the main ideas and concepts presented on this website"
-                elif "facts" in question:
-                    st.session_state.question_input = "List the important facts and information from this website"
-                st.rerun()
+            with question_cols[i]:
+                if st.button(
+                    question, 
+                    key=f"q_{i}",
+                    help=f"Click to use this question: {question}",
+                    use_container_width=True
+                ):
+                    if "Summarize" in question:
+                        st.session_state.question_input = "Summarize the main content and key points from this website"
+                    elif "news" in question:
+                        st.session_state.question_input = "What are the latest news or updates mentioned on this website?"
+                    elif "topics" in question:
+                        st.session_state.question_input = "What are the main topics discussed on this website?"
+                    elif "ideas" in question:
+                        st.session_state.question_input = "Explain the main ideas and concepts presented on this website"
+                    elif "facts" in question:
+                        st.session_state.question_input = "List the important facts and information from this website"
+                    st.rerun()
         
         st.markdown("<br><br>", unsafe_allow_html=True)
         
         # Get Answer Button - make it more prominent
-        st.markdown("### 🚀 Step 3: Get Your Answer")
+        st.markdown("### 🚀 Get Your Answer")
         if st.button("🚀 Ask the AI Assistant", type="primary", use_container_width=True):
             if not url_input.strip():
                 st.error("❌ Please enter a valid URL")
