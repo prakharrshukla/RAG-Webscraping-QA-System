@@ -23,17 +23,33 @@ st.set_page_config(
 # Custom CSS with improved color scheme
 st.markdown("""
 <style>
+    /* NUCLEAR APPROACH - Override EVERYTHING */
+    
+    /* Global text color override - force white text everywhere */
+    * {
+        color: #ffffff !important;
+    }
+    
+    /* Specific overrides for all possible elements */
+    html *, body *, div *, span *, p *, h1 *, h2 *, h3 *, h4 *, h5 *, h6 *, 
+    li *, ul *, ol *, a *, strong *, em *, code *, pre *, 
+    .stMarkdown *, .stText *, .element-container *, 
+    [data-testid] *, [class*="st"] * {
+        color: #ffffff !important;
+    }
+    
     /* Main app background and layout */
     .main .block-container {
         padding-top: 2rem;
         padding-bottom: 2rem;
         max-width: 1200px;
+        color: #ffffff !important;
     }
     
     /* Header styling */
     .main-header {
         font-size: 2.5rem;
-        color: #1e40af;
+        color: #ffffff !important;
         text-align: center;
         margin-bottom: 2rem;
         font-weight: 700;
@@ -48,6 +64,8 @@ st.markdown("""
         border-radius: 10px;
         padding: 12px 16px;
         transition: border-color 0.3s ease;
+        color: #000000 !important;
+        background-color: #ffffff !important;
     }
     
     .stTextInput > div > div > input:focus {
@@ -63,6 +81,8 @@ st.markdown("""
         border-radius: 10px;
         padding: 12px 16px;
         transition: border-color 0.3s ease;
+        color: #000000 !important;
+        background-color: #ffffff !important;
     }
     
     .stTextArea > div > div > textarea:focus {
@@ -80,7 +100,7 @@ st.markdown("""
         transition: all 0.3s ease;
         font-family: 'Inter', 'Segoe UI', sans-serif;
         background-color: white;
-        color: #374151;
+        color: #1f2937 !important;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         min-height: 42px;
     }
@@ -88,7 +108,7 @@ st.markdown("""
     .stButton > button:hover {
         background-color: #f8fafc;
         border-color: #3b82f6;
-        color: #1e40af;
+        color: #1e40af !important;
         transform: translateY(-1px);
         box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
     }
@@ -99,12 +119,13 @@ st.markdown("""
         text-align: center;
         line-height: 1.2;
         font-size: 13px;
+        color: #1f2937 !important;
     }
     
     /* Primary button styling */
     .stButton > button[kind="primary"] {
         background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-        color: white;
+        color: white !important;
         font-size: 18px;
         font-weight: 700;
         padding: 1rem 2rem;
@@ -116,18 +137,25 @@ st.markdown("""
         background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        color: white !important;
     }
     
     /* Sidebar styling */
     .css-1d391kg, [data-testid="stSidebar"] > div {
-        background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+        background: linear-gradient(180deg, #1f2937 0%, #374151 100%) !important;
+        color: #ffffff !important;
+    }
+    
+    /* Force sidebar text to be white */
+    [data-testid="stSidebar"], [data-testid="stSidebar"] * {
+        color: #ffffff !important;
     }
     
     /* Sidebar button styling */
     [data-testid="stSidebar"] .stButton > button {
-        background-color: white;
-        border: 2px solid #e5e7eb;
-        color: #374151;
+        background-color: #374151 !important;
+        border: 2px solid #6b7280 !important;
+        color: #ffffff !important;
         font-weight: 500;
         width: 100%;
         margin-bottom: 8px;
@@ -138,44 +166,45 @@ st.markdown("""
     }
     
     [data-testid="stSidebar"] .stButton > button:hover {
-        background-color: #f8fafc;
-        border-color: #3b82f6;
-        color: #1e40af;
+        background-color: #4b5563 !important;
+        border-color: #3b82f6 !important;
+        color: #ffffff !important;
         transform: none;
         box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
     }
     
-    /* Success/Error/Info message styling */
-    .stSuccess {
+    /* Success/Error/Info message styling - DARK BACKGROUNDS */
+    .stSuccess, div[data-testid="stAlert"], div[data-baseweb="notification"] {
         background-color: #064e3b !important;
-        border: 2px solid #10b981;
-        border-radius: 10px;
-        padding: 1rem;
+        border: 2px solid #10b981 !important;
+        border-radius: 10px !important;
+        padding: 1rem !important;
         color: #ffffff !important;
     }
     
     .stError {
         background-color: #7f1d1d !important;
-        border: 2px solid #ef4444;
-        border-radius: 10px;
-        padding: 1rem;
+        border: 2px solid #ef4444 !important;
         color: #ffffff !important;
     }
     
     .stInfo {
         background-color: #1e3a8a !important;
-        border: 2px solid #3b82f6;
-        border-radius: 10px;
-        padding: 1rem;
+        border: 2px solid #3b82f6 !important;
         color: #ffffff !important;
     }
     
     .stWarning {
         background-color: #92400e !important;
-        border: 2px solid #f59e0b;
-        border-radius: 10px;
-        padding: 1rem;
+        border: 2px solid #f59e0b !important;
         color: #ffffff !important;
+    }
+    
+    /* Force ALL alert content to be white */
+    .stSuccess *, .stError *, .stInfo *, .stWarning *, 
+    div[data-testid="stAlert"] *, div[data-baseweb="notification"] * {
+        color: #ffffff !important;
+        background: transparent !important;
     }
     
     /* Header styling - white text for dark backgrounds */
@@ -185,45 +214,8 @@ st.markdown("""
         font-weight: 600;
     }
     
-    h1 { color: #ffffff !important; }
-    h2 { color: #ffffff !important; }
-    h3 { color: #ffffff !important; }
-    
-    /* Better text visibility for section headers */
-    .stMarkdown h3 {
-        color: #ffffff !important;
-        font-weight: 700 !important;
-        margin-bottom: 0.5rem !important;
-    }
-    
-    /* Bold text styling */
-    .stMarkdown strong {
-        color: #ffffff !important;
-        font-weight: 700 !important;
-    }
-    
-    /* Regular text styling */
-    .stMarkdown p {
-        color: #ffffff !important;
-        line-height: 1.6 !important;
-    }
-    
-    /* Main content text color fixes */
-    .stMarkdown, .stMarkdown div, .stMarkdown span {
-        color: #ffffff !important;
-    }
-    
-    /* All text should be white for dark theme */
-    .main .stMarkdown {
-        color: #ffffff !important;
-    }
-    
-    .main .stMarkdown * {
-        color: #ffffff !important;
-    }
-    
-    /* Specific fixes for all text elements */
-    .stMarkdown > div {
+    /* All markdown content should be white */
+    .stMarkdown, .stMarkdown *, .element-container, .element-container * {
         color: #ffffff !important;
     }
     
@@ -233,20 +225,34 @@ st.markdown("""
         font-weight: 600 !important;
     }
     
+    /* Lists and bullet points */
+    ul, ol, li {
+        color: #ffffff !important;
+    }
+    
+    ul li, ol li {
+        color: #ffffff !important;
+    }
+    
     /* Content spacing */
     .element-container {
         margin-bottom: 1rem;
+        color: #ffffff !important;
     }
     
     /* Custom colored boxes */
     .gradient-box {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        color: white !important;
         padding: 1.5rem;
         border-radius: 15px;
         margin: 1rem 0;
         box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         text-align: center;
+    }
+    
+    .gradient-box * {
+        color: white !important;
     }
     
     .answer-display {
@@ -261,9 +267,14 @@ st.markdown("""
         box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
     }
     
+    .answer-display * {
+        color: #ffffff !important;
+    }
+    
     /* Columns styling */
     .stColumn > div {
         padding: 0 1rem;
+        color: #ffffff !important;
     }
     
     /* Progress bar styling */
@@ -280,178 +291,55 @@ st.markdown("""
         border-top-color: #3b82f6 !important;
     }
     
-    /* Make the main content more readable */
-    p, div, span {
+    /* Make sure ALL text is readable */
+    p, div, span, strong, em, code {
         font-family: 'Inter', 'Segoe UI', sans-serif;
         line-height: 1.6;
         color: #ffffff !important;
     }
     
-    /* Global text color override for dark theme compatibility */
-    .stApp, .stApp * {
+    /* Number lists and bullets */
+    .stMarkdown ol, .stMarkdown ul {
         color: #ffffff !important;
     }
     
-    /* Fix markdown styling - white text for dark theme */
-    .stMarkdown {
+    .stMarkdown ol li, .stMarkdown ul li {
         color: #ffffff !important;
     }
     
-    /* Override Streamlit's default text colors */
-    .main div[data-testid="stMarkdownContainer"] {
+    /* FINAL NUCLEAR OVERRIDE */
+    .main * {
         color: #ffffff !important;
     }
     
-    .main div[data-testid="stMarkdownContainer"] * {
+    /* Exception for buttons - keep them readable with dark text on white background */
+    button {
+        color: #1f2937 !important;
+        background-color: #ffffff !important;
+    }
+    
+    button[kind="primary"] {
         color: #ffffff !important;
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
     }
     
-    /* Specific element overrides */
-    .element-container, .element-container * {
+    /* Sidebar specific overrides */
+    [data-testid="stSidebar"] button {
         color: #ffffff !important;
+        background-color: #374151 !important;
     }
     
-    /* Text input and labels */
-    .stTextInput > label, .stTextArea > label {
-        color: #ffffff !important;
-        font-weight: 600 !important;
-    }
-    
-    /* Fix Streamlit's built-in message containers */
-    div[data-testid="stAlert"] {
-        background-color: #1f2937 !important;
-        color: #ffffff !important;
-        border-radius: 10px;
-    }
-    
-    div[data-testid="stAlert"] > div {
-        color: #ffffff !important;
-    }
-    
-    /* Success message containers */
-    div[data-testid="stAlert"][data-baseweb="notification"][kind="success"] {
-        background-color: #064e3b !important;
-        border: 2px solid #10b981 !important;
-    }
-    
-    /* Error message containers */
-    div[data-testid="stAlert"][data-baseweb="notification"][kind="error"] {
-        background-color: #7f1d1d !important;
-        border: 2px solid #ef4444 !important;
-    }
-    
-    /* Info message containers */
-    div[data-testid="stAlert"][data-baseweb="notification"][kind="info"] {
-        background-color: #1e3a8a !important;
-        border: 2px solid #3b82f6 !important;
-    }
-    
-    /* Warning message containers */
-    div[data-testid="stAlert"][data-baseweb="notification"][kind="warning"] {
-        background-color: #92400e !important;
-        border: 2px solid #f59e0b !important;
-    }
-    
-    /* Override any remaining light backgrounds */
-    .stAlert, .stSuccess, .stError, .stInfo, .stWarning {
-        color: #ffffff !important;
-    }
-    
-    .stAlert *, .stSuccess *, .stError *, .stInfo *, .stWarning * {
-        color: #ffffff !important;
-    }
-    
-    /* Force dark theme for all notification elements */
-    [data-testid="stNotificationContentSuccess"],
-    [data-testid="stNotificationContentError"],
-    [data-testid="stNotificationContentInfo"],
-    [data-testid="stNotificationContentWarning"] {
-        background-color: #1f2937 !important;
-        color: #ffffff !important;
-    }
-    
-    /* Sidebar text fixes */
-    [data-testid="stSidebar"] * {
+    /* Make sure button text is always visible */
+    .stButton button, .stButton button * {
         color: #1f2937 !important;
     }
     
-    [data-testid="stSidebar"] .stAlert * {
+    .stButton button[kind="primary"], .stButton button[kind="primary"] * {
         color: #ffffff !important;
     }
     
-    /* More aggressive overrides for all alert and message components */
-    .stAlert, .stAlert *, 
-    [class*="alert"], [class*="Alert"],
-    [data-testid*="alert"], [data-testid*="Alert"],
-    [data-testid="stNotification"], [data-testid="stNotification"] *,
-    .element-container div[role="alert"], .element-container div[role="alert"] *,
-    div[data-baseweb="notification"], div[data-baseweb="notification"] * {
-        background-color: #1f2937 !important;
+    [data-testid="stSidebar"] .stButton button, [data-testid="stSidebar"] .stButton button * {
         color: #ffffff !important;
-        border-radius: 10px !important;
-    }
-    
-    /* Success message override */
-    .stAlert[kind="success"], .stAlert[kind="success"] *,
-    div[data-baseweb="notification"][kind="success"], div[data-baseweb="notification"][kind="success"] * {
-        background-color: #064e3b !important;
-        color: #ffffff !important;
-        border: 2px solid #10b981 !important;
-    }
-    
-    /* Error message override */
-    .stAlert[kind="error"], .stAlert[kind="error"] *,
-    div[data-baseweb="notification"][kind="error"], div[data-baseweb="notification"][kind="error"] * {
-        background-color: #7f1d1d !important;
-        color: #ffffff !important;
-        border: 2px solid #ef4444 !important;
-    }
-    
-    /* Info message override */
-    .stAlert[kind="info"], .stAlert[kind="info"] *,
-    div[data-baseweb="notification"][kind="info"], div[data-baseweb="notification"][kind="info"] * {
-        background-color: #1e3a8a !important;
-        color: #ffffff !important;
-        border: 2px solid #3b82f6 !important;
-    }
-    
-    /* Warning message override */
-    .stAlert[kind="warning"], .stAlert[kind="warning"] *,
-    div[data-baseweb="notification"][kind="warning"], div[data-baseweb="notification"][kind="warning"] * {
-        background-color: #92400e !important;
-        color: #ffffff !important;
-        border: 2px solid #f59e0b !important;
-    }
-    
-    /* Custom success/error boxes for inline use */
-    .custom-success {
-        background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
-        border: 2px solid #10b981;
-        border-radius: 10px;
-        padding: 1rem;
-        margin: 0.5rem 0;
-        color: #ffffff !important;
-        font-weight: 500;
-    }
-    
-    .custom-error {
-        background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
-        border: 2px solid #ef4444;
-        border-radius: 10px;
-        padding: 1rem;
-        margin: 0.5rem 0;
-        color: #ffffff !important;
-        font-weight: 500;
-    }
-    
-    .custom-info {
-        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-        border: 2px solid #3b82f6;
-        border-radius: 10px;
-        padding: 1rem;
-        margin: 0.5rem 0;
-        color: #ffffff !important;
-        font-weight: 500;
     }
 </style>
 """, unsafe_allow_html=True)
