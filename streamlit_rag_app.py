@@ -4,9 +4,9 @@ from bs4 import BeautifulSoup
 from sentence_transformers import SentenceTransformer
 import chromadb
 from chromadb.config import Settings
-from langchain_community.vectorstores import Chroma
-from langchain_community.embeddings import SentenceTransformerEmbeddings
-from langchain_community.llms import Ollama
+from langchain_chroma import Chroma
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_ollama import OllamaLLM
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 import uuid
@@ -297,7 +297,7 @@ def webscrape_rag_qa(url, question, progress_bar):
         # 5. Set up RAG pipeline
         progress_bar.progress(85)
         st.info("🔗 Setting up RAG pipeline...")
-        embedding_func = SentenceTransformerEmbeddings(model_name='all-MiniLM-L6-v2')
+        embedding_func = HuggingFaceEmbeddings(model_name='all-MiniLM-L6-v2')
         vectorstore = Chroma(
             collection_name=collection_name,
             embedding_function=embedding_func,
@@ -306,7 +306,7 @@ def webscrape_rag_qa(url, question, progress_bar):
         retriever = vectorstore.as_retriever(search_kwargs={"k": 4})
         
         # 6. Set up Ollama LLM
-        llm = Ollama(model="llama3.2:1b")
+        llm = OllamaLLM(model="llama3.2:1b")
         
         # 7. Create custom prompt
         prompt_template = """Use the following pieces of context to answer the question.
@@ -334,7 +334,7 @@ Answer:"""
         # 9. Get answer
         progress_bar.progress(95)
         st.info("🤖 Generating answer...")
-        answer = rag_chain.run(question)
+        answer = rag_chain.invoke({"query": question})["result"]
         progress_bar.progress(100)
         
         return answer

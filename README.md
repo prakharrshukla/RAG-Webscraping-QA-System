@@ -188,34 +188,7 @@ if 'custom-site.com' in current_url:
     content = extract_custom_content(soup)
 ```
 
-## 🤝 **Contributing**
-
-1. Fork the repository
-2. Create feature branch: `git checkout -b feature/amazing-feature`
-3. Commit changes: `git commit -m 'Add amazing feature'`
-4. Push to branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
-
-## 📝 **License**
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 **Acknowledgments**
-
-- **Ollama Team** - For excellent local LLM infrastructure
-- **Streamlit** - For the amazing web app framework  
-- **LangChain** - For RAG pipeline orchestration
-- **ChromaDB** - For efficient vector storage
-- **Sentence Transformers** - For semantic embeddings
-
-## 📞 **Support**
-
-- 🐛 **Issues**: [GitHub Issues](https://github.com/yourusername/RAG-Webscraping-QA-System/issues)
-- 💡 **Feature Requests**: Use GitHub Issues with `enhancement` label
-- 📧 **Contact**: Your email or social links
-
----
 
 **⭐ Star this repo if it helped you! ⭐**
 
-*Built with ❤️ for the AI and web scraping community*
+
