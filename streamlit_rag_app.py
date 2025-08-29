@@ -20,111 +20,252 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS
+# Custom CSS with improved color scheme
 st.markdown("""
 <style>
-    .main-header {
-        font-size: 2.5rem;
-        color: #1e3a8a;
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-    
-    /* Main content area styling */
+    /* Main app background and layout */
     .main .block-container {
         padding-top: 2rem;
         padding-bottom: 2rem;
+        max-width: 1200px;
     }
     
-    /* Better font for main content */
+    /* Header styling */
+    .main-header {
+        font-size: 2.5rem;
+        color: #1e40af;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-weight: 700;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    /* Consistent font styling */
     .stTextInput > div > div > input {
         font-size: 16px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 12px 16px;
+        transition: border-color 0.3s ease;
+    }
+    
+    .stTextInput > div > div > input:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
     }
     
     .stTextArea > div > div > textarea {
         font-size: 16px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        line-height: 1.5;
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        line-height: 1.6;
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 12px 16px;
+        transition: border-color 0.3s ease;
     }
     
-    /* Make buttons more prominent */
+    .stTextArea > div > div > textarea:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    
+    /* Button styling */
     .stButton > button {
         font-size: 16px;
         font-weight: 600;
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
+        padding: 0.7rem 1.5rem;
+        border-radius: 10px;
         border: none;
         transition: all 0.3s ease;
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        background-color: #f8fafc;
+        border: 2px solid #e2e8f0;
+        color: #374151;
+    }
+    
+    .stButton > button:hover {
+        background-color: #f1f5f9;
+        border-color: #cbd5e1;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
     
     /* Primary button styling */
     .stButton > button[kind="primary"] {
-        background: linear-gradient(45deg, #2563eb, #1d4ed8);
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
         color: white;
         font-size: 18px;
-        padding: 0.75rem 2rem;
+        font-weight: 700;
+        padding: 1rem 2rem;
+        border: none;
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
     }
     
     .stButton > button[kind="primary"]:hover {
+        background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
     }
     
     /* Sidebar styling */
-    .css-1d391kg {
+    .css-1d391kg, [data-testid="stSidebar"] > div {
+        background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    }
+    
+    /* Sidebar button styling */
+    [data-testid="stSidebar"] .stButton > button {
+        background-color: white;
+        border: 2px solid #e5e7eb;
+        color: #374151;
+        font-weight: 500;
+        width: 100%;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        padding: 0.6rem 1rem;
+        text-align: left;
+        font-size: 14px;
+    }
+    
+    [data-testid="stSidebar"] .stButton > button:hover {
         background-color: #f8fafc;
+        border-color: #3b82f6;
+        color: #1e40af;
+        transform: none;
+        box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
     }
     
-    /* Success/Error/Info boxes */
-    .success-box {
+    /* Success/Error/Info message styling */
+    .stSuccess {
+        background-color: #ecfdf5;
+        border: 2px solid #10b981;
+        border-radius: 10px;
         padding: 1rem;
-        border-radius: 8px;
-        background-color: #dcfce7;
-        border: 2px solid #16a34a;
-        margin: 1rem 0;
-        font-size: 15px;
+        color: #047857;
     }
     
-    .error-box {
-        padding: 1rem;
-        border-radius: 8px;
+    .stError {
         background-color: #fef2f2;
-        border: 2px solid #dc2626;
-        margin: 1rem 0;
-        font-size: 15px;
-    }
-    
-    .info-box {
+        border: 2px solid #ef4444;
+        border-radius: 10px;
         padding: 1rem;
-        border-radius: 8px;
+        color: #dc2626;
+    }
+    
+    .stInfo {
         background-color: #eff6ff;
-        border: 2px solid #2563eb;
-        margin: 1rem 0;
-        font-size: 15px;
+        border: 2px solid #3b82f6;
+        border-radius: 10px;
+        padding: 1rem;
+        color: #1d4ed8;
     }
     
-    /* Make headers more readable */
-    h1, h2, h3 {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    .stWarning {
+        background-color: #fffbeb;
+        border: 2px solid #f59e0b;
+        border-radius: 10px;
+        padding: 1rem;
+        color: #d97706;
+    }
+    
+    /* Header styling */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Inter', 'Segoe UI', sans-serif;
         color: #1f2937;
+        font-weight: 600;
     }
     
-    /* Better spacing for content */
+    h1 { color: #111827; }
+    h2 { color: #1f2937; }
+    h3 { color: #374151; }
+    
+    /* Content spacing */
     .element-container {
         margin-bottom: 1rem;
     }
     
-    /* Answer display styling */
-    .answer-box {
-        background-color: #f9fafb;
-        border: 2px solid #e5e7eb;
-        border-radius: 10px;
+    /* Custom colored boxes */
+    .gradient-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
         padding: 1.5rem;
+        border-radius: 15px;
         margin: 1rem 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        text-align: center;
+    }
+    
+    .answer-display {
+        background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+        border: 2px solid #22c55e;
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 1.5rem 0;
+        color: #1f2937;
         font-size: 16px;
+        line-height: 1.7;
+        box-shadow: 0 4px 15px rgba(34, 197, 94, 0.1);
+    }
+    
+    /* Columns styling */
+    .stColumn > div {
+        padding: 0 1rem;
+    }
+    
+    /* Progress bar styling */
+    .stProgress .st-bo {
+        background-color: #e5e7eb;
+    }
+    
+    .stProgress .st-bp {
+        background-color: #3b82f6;
+    }
+    
+    /* Spinner styling */
+    .stSpinner > div {
+        border-top-color: #3b82f6 !important;
+    }
+    
+    /* Make the main content more readable */
+    p, div, span {
+        font-family: 'Inter', 'Segoe UI', sans-serif;
         line-height: 1.6;
+    }
+    
+    /* Fix markdown styling */
+    .stMarkdown {
+        color: #374151;
+    }
+    
+    /* Custom success/error boxes for inline use */
+    .custom-success {
+        background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        border: 2px solid #10b981;
+        border-radius: 10px;
+        padding: 1rem;
+        margin: 0.5rem 0;
+        color: #047857;
+        font-weight: 500;
+    }
+    
+    .custom-error {
+        background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+        border: 2px solid #ef4444;
+        border-radius: 10px;
+        padding: 1rem;
+        margin: 0.5rem 0;
+        color: #dc2626;
+        font-weight: 500;
+    }
+    
+    .custom-info {
+        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        border: 2px solid #3b82f6;
+        border-radius: 10px;
+        padding: 1rem;
+        margin: 0.5rem 0;
+        color: #1d4ed8;
+        font-weight: 500;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -347,9 +488,9 @@ def main():
     # Header
     st.markdown('<h1 class="main-header">🤖 Smart Website Q&A System</h1>', unsafe_allow_html=True)
     st.markdown("""
-    <div style="text-align: center; margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-        <h2 style="color: white; margin-bottom: 1rem;">🌐 Ask Questions About Any Website</h2>
-        <p style="font-size: 18px; margin-bottom: 0.5rem;">Simply paste a website URL, ask your question, and get AI-powered answers!</p>
+    <div class="gradient-box">
+        <h2 style="color: white; margin-bottom: 1rem; font-weight: 700;">🌐 Ask Questions About Any Website</h2>
+        <p style="font-size: 18px; margin-bottom: 0.5rem; opacity: 0.95;">Simply paste a website URL, ask your question, and get AI-powered answers!</p>
         <p style="font-size: 16px; opacity: 0.9;"><strong>💡 Pro Tip:</strong> Use the recommended websites from the sidebar for best results</p>
     </div>
     """, unsafe_allow_html=True)
@@ -557,10 +698,10 @@ def main():
             else:
                 st.success("✅ Answer generated successfully!")
                 
-                # Display answer in a nice box
+                # Display answer in a nice box with consistent styling
                 st.markdown(f"""
-                <div style="background-color: #f0fdf4; border: 2px solid #22c55e; border-radius: 10px; padding: 20px; margin: 15px 0;">
-                    <div style="font-size: 16px; line-height: 1.6; color: #1f2937;">
+                <div class="answer-display">
+                    <div style="font-size: 16px; line-height: 1.7; color: #1f2937;">
                         {answer}
                     </div>
                 </div>
