@@ -72,23 +72,33 @@ st.markdown("""
     
     /* Button styling */
     .stButton > button {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 600;
-        padding: 0.7rem 1.5rem;
+        padding: 0.6rem 1rem;
         border-radius: 10px;
-        border: none;
+        border: 2px solid #e5e7eb;
         transition: all 0.3s ease;
         font-family: 'Inter', 'Segoe UI', sans-serif;
-        background-color: #f8fafc;
-        border: 2px solid #e2e8f0;
+        background-color: white;
         color: #374151;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        min-height: 42px;
     }
     
     .stButton > button:hover {
-        background-color: #f1f5f9;
-        border-color: #cbd5e1;
+        background-color: #f8fafc;
+        border-color: #3b82f6;
+        color: #1e40af;
         transform: translateY(-1px);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    }
+    
+    /* Quick question buttons - better alignment and visibility */
+    .stButton > button {
+        white-space: normal;
+        text-align: center;
+        line-height: 1.2;
+        font-size: 13px;
     }
     
     /* Primary button styling */
@@ -137,47 +147,91 @@ st.markdown("""
     
     /* Success/Error/Info message styling */
     .stSuccess {
-        background-color: #ecfdf5;
+        background-color: #064e3b !important;
         border: 2px solid #10b981;
         border-radius: 10px;
         padding: 1rem;
-        color: #047857;
+        color: #ffffff !important;
     }
     
     .stError {
-        background-color: #fef2f2;
+        background-color: #7f1d1d !important;
         border: 2px solid #ef4444;
         border-radius: 10px;
         padding: 1rem;
-        color: #dc2626;
+        color: #ffffff !important;
     }
     
     .stInfo {
-        background-color: #eff6ff;
+        background-color: #1e3a8a !important;
         border: 2px solid #3b82f6;
         border-radius: 10px;
         padding: 1rem;
-        color: #1d4ed8;
+        color: #ffffff !important;
     }
     
     .stWarning {
-        background-color: #fffbeb;
+        background-color: #92400e !important;
         border: 2px solid #f59e0b;
         border-radius: 10px;
         padding: 1rem;
-        color: #d97706;
+        color: #ffffff !important;
     }
     
-    /* Header styling */
+    /* Header styling - white text for dark backgrounds */
     h1, h2, h3, h4, h5, h6 {
         font-family: 'Inter', 'Segoe UI', sans-serif;
-        color: #1f2937;
+        color: #ffffff !important;
         font-weight: 600;
     }
     
-    h1 { color: #111827; }
-    h2 { color: #1f2937; }
-    h3 { color: #374151; }
+    h1 { color: #ffffff !important; }
+    h2 { color: #ffffff !important; }
+    h3 { color: #ffffff !important; }
+    
+    /* Better text visibility for section headers */
+    .stMarkdown h3 {
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Bold text styling */
+    .stMarkdown strong {
+        color: #ffffff !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Regular text styling */
+    .stMarkdown p {
+        color: #ffffff !important;
+        line-height: 1.6 !important;
+    }
+    
+    /* Main content text color fixes */
+    .stMarkdown, .stMarkdown div, .stMarkdown span {
+        color: #ffffff !important;
+    }
+    
+    /* All text should be white for dark theme */
+    .main .stMarkdown {
+        color: #ffffff !important;
+    }
+    
+    .main .stMarkdown * {
+        color: #ffffff !important;
+    }
+    
+    /* Specific fixes for all text elements */
+    .stMarkdown > div {
+        color: #ffffff !important;
+    }
+    
+    /* Labels and form text */
+    label, .stTextInput label, .stTextArea label {
+        color: #ffffff !important;
+        font-weight: 600 !important;
+    }
     
     /* Content spacing */
     .element-container {
@@ -196,15 +250,15 @@ st.markdown("""
     }
     
     .answer-display {
-        background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+        background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
         border: 2px solid #22c55e;
         border-radius: 15px;
         padding: 2rem;
         margin: 1.5rem 0;
-        color: #1f2937;
+        color: #ffffff !important;
         font-size: 16px;
         line-height: 1.7;
-        box-shadow: 0 4px 15px rgba(34, 197, 94, 0.1);
+        box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
     }
     
     /* Columns styling */
@@ -230,41 +284,173 @@ st.markdown("""
     p, div, span {
         font-family: 'Inter', 'Segoe UI', sans-serif;
         line-height: 1.6;
+        color: #ffffff !important;
     }
     
-    /* Fix markdown styling */
+    /* Global text color override for dark theme compatibility */
+    .stApp, .stApp * {
+        color: #ffffff !important;
+    }
+    
+    /* Fix markdown styling - white text for dark theme */
     .stMarkdown {
-        color: #374151;
+        color: #ffffff !important;
+    }
+    
+    /* Override Streamlit's default text colors */
+    .main div[data-testid="stMarkdownContainer"] {
+        color: #ffffff !important;
+    }
+    
+    .main div[data-testid="stMarkdownContainer"] * {
+        color: #ffffff !important;
+    }
+    
+    /* Specific element overrides */
+    .element-container, .element-container * {
+        color: #ffffff !important;
+    }
+    
+    /* Text input and labels */
+    .stTextInput > label, .stTextArea > label {
+        color: #ffffff !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Fix Streamlit's built-in message containers */
+    div[data-testid="stAlert"] {
+        background-color: #1f2937 !important;
+        color: #ffffff !important;
+        border-radius: 10px;
+    }
+    
+    div[data-testid="stAlert"] > div {
+        color: #ffffff !important;
+    }
+    
+    /* Success message containers */
+    div[data-testid="stAlert"][data-baseweb="notification"][kind="success"] {
+        background-color: #064e3b !important;
+        border: 2px solid #10b981 !important;
+    }
+    
+    /* Error message containers */
+    div[data-testid="stAlert"][data-baseweb="notification"][kind="error"] {
+        background-color: #7f1d1d !important;
+        border: 2px solid #ef4444 !important;
+    }
+    
+    /* Info message containers */
+    div[data-testid="stAlert"][data-baseweb="notification"][kind="info"] {
+        background-color: #1e3a8a !important;
+        border: 2px solid #3b82f6 !important;
+    }
+    
+    /* Warning message containers */
+    div[data-testid="stAlert"][data-baseweb="notification"][kind="warning"] {
+        background-color: #92400e !important;
+        border: 2px solid #f59e0b !important;
+    }
+    
+    /* Override any remaining light backgrounds */
+    .stAlert, .stSuccess, .stError, .stInfo, .stWarning {
+        color: #ffffff !important;
+    }
+    
+    .stAlert *, .stSuccess *, .stError *, .stInfo *, .stWarning * {
+        color: #ffffff !important;
+    }
+    
+    /* Force dark theme for all notification elements */
+    [data-testid="stNotificationContentSuccess"],
+    [data-testid="stNotificationContentError"],
+    [data-testid="stNotificationContentInfo"],
+    [data-testid="stNotificationContentWarning"] {
+        background-color: #1f2937 !important;
+        color: #ffffff !important;
+    }
+    
+    /* Sidebar text fixes */
+    [data-testid="stSidebar"] * {
+        color: #1f2937 !important;
+    }
+    
+    [data-testid="stSidebar"] .stAlert * {
+        color: #ffffff !important;
+    }
+    
+    /* More aggressive overrides for all alert and message components */
+    .stAlert, .stAlert *, 
+    [class*="alert"], [class*="Alert"],
+    [data-testid*="alert"], [data-testid*="Alert"],
+    [data-testid="stNotification"], [data-testid="stNotification"] *,
+    .element-container div[role="alert"], .element-container div[role="alert"] *,
+    div[data-baseweb="notification"], div[data-baseweb="notification"] * {
+        background-color: #1f2937 !important;
+        color: #ffffff !important;
+        border-radius: 10px !important;
+    }
+    
+    /* Success message override */
+    .stAlert[kind="success"], .stAlert[kind="success"] *,
+    div[data-baseweb="notification"][kind="success"], div[data-baseweb="notification"][kind="success"] * {
+        background-color: #064e3b !important;
+        color: #ffffff !important;
+        border: 2px solid #10b981 !important;
+    }
+    
+    /* Error message override */
+    .stAlert[kind="error"], .stAlert[kind="error"] *,
+    div[data-baseweb="notification"][kind="error"], div[data-baseweb="notification"][kind="error"] * {
+        background-color: #7f1d1d !important;
+        color: #ffffff !important;
+        border: 2px solid #ef4444 !important;
+    }
+    
+    /* Info message override */
+    .stAlert[kind="info"], .stAlert[kind="info"] *,
+    div[data-baseweb="notification"][kind="info"], div[data-baseweb="notification"][kind="info"] * {
+        background-color: #1e3a8a !important;
+        color: #ffffff !important;
+        border: 2px solid #3b82f6 !important;
+    }
+    
+    /* Warning message override */
+    .stAlert[kind="warning"], .stAlert[kind="warning"] *,
+    div[data-baseweb="notification"][kind="warning"], div[data-baseweb="notification"][kind="warning"] * {
+        background-color: #92400e !important;
+        color: #ffffff !important;
+        border: 2px solid #f59e0b !important;
     }
     
     /* Custom success/error boxes for inline use */
     .custom-success {
-        background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
         border: 2px solid #10b981;
         border-radius: 10px;
         padding: 1rem;
         margin: 0.5rem 0;
-        color: #047857;
+        color: #ffffff !important;
         font-weight: 500;
     }
     
     .custom-error {
-        background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+        background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
         border: 2px solid #ef4444;
         border-radius: 10px;
         padding: 1rem;
         margin: 0.5rem 0;
-        color: #dc2626;
+        color: #ffffff !important;
         font-weight: 500;
     }
     
     .custom-info {
-        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
         border: 2px solid #3b82f6;
         border-radius: 10px;
         padding: 1rem;
         margin: 0.5rem 0;
-        color: #1d4ed8;
+        color: #ffffff !important;
         font-weight: 500;
     }
 </style>
@@ -637,8 +823,8 @@ def main():
             help="💡 Ask specific questions for better answers!"
         )
         
-        # Sample question suggestions
-        st.markdown("**💡 Quick Question Ideas:**")
+        # Sample question suggestions with improved layout
+        st.markdown('<h3 style="color: #ffffff !important; font-weight: 700 !important;">💡 Quick Question Ideas:</h3>', unsafe_allow_html=True)
         sample_questions = [
             "📋 Summarize main points",
             "📰 Latest news updates", 
@@ -647,20 +833,24 @@ def main():
             "📊 Important facts listed"
         ]
         
-        cols = st.columns(len(sample_questions))
+        # Create evenly distributed 3 columns for better alignment  
+        col1, col2, col3 = st.columns(3)
+        columns = [col1, col2, col3, col1, col2]  # Cycle back for 4th and 5th buttons
+        
         for i, question in enumerate(sample_questions):
-            if cols[i].button(question, key=f"q_{i}"):
-                if "Summarize" in question:
-                    st.session_state.question_input = "Summarize the main content and key points from this website"
-                elif "news" in question:
-                    st.session_state.question_input = "What are the latest news or updates mentioned on this website?"
-                elif "topics" in question:
-                    st.session_state.question_input = "What are the main topics discussed on this website?"
-                elif "ideas" in question:
-                    st.session_state.question_input = "Explain the main ideas and concepts presented on this website"
-                elif "facts" in question:
-                    st.session_state.question_input = "List the important facts and information from this website"
-                st.rerun()
+            with columns[i]:
+                if st.button(question, key=f"q_{i}", use_container_width=True):
+                    if "Summarize" in question:
+                        st.session_state.question_input = "Summarize the main content and key points from this website"
+                    elif "news" in question:
+                        st.session_state.question_input = "What are the latest news or updates mentioned on this website?"
+                    elif "topics" in question:
+                        st.session_state.question_input = "What are the main topics discussed on this website?"
+                    elif "ideas" in question:
+                        st.session_state.question_input = "Explain the main ideas and concepts presented on this website"
+                    elif "facts" in question:
+                        st.session_state.question_input = "List the important facts and information from this website"
+                    st.rerun()
         
         st.markdown("<br><br>", unsafe_allow_html=True)
         
@@ -701,7 +891,7 @@ def main():
                 # Display answer in a nice box with consistent styling
                 st.markdown(f"""
                 <div class="answer-display">
-                    <div style="font-size: 16px; line-height: 1.7; color: #1f2937;">
+                    <div style="font-size: 16px; line-height: 1.7; color: #ffffff !important;">
                         {answer}
                     </div>
                 </div>
